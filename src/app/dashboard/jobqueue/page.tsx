@@ -6,7 +6,7 @@ import AddTask from "./addtask"
 export default async function JobQueuePage() {
     const data = await getJob()
     return (
-        <div className="container mx-auto py-10 ml-2 ">
+        <div className="mx-auto py-10 ml-2 w-full">
             <AddTask />
             <DataTable columns={columns} data={data} />
         </div>

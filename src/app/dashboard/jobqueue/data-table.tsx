@@ -52,7 +52,8 @@ export function DataTable<TData, TValue>({
     })
 
     return (
-        <div className="overflow-hidden rounded-md border">
+        // <div className="overflow-hidden rounded-md border w-[800px]">
+        <div className="table-auto w-full overflow-x-auto">
             <Input
                 placeholder="Filter jobs..."
                 value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
@@ -60,9 +61,9 @@ export function DataTable<TData, TValue>({
                     table.getColumn("status")?.setFilterValue(e.target.value)
                 }
                 
-                className="max-w-sm"
+                //className="max-w-sm"
             />
-            <Table>
+            <Table className="w-full">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>

@@ -47,7 +47,7 @@ export const columns: ColumnDef<JobQueue>[] = [
     id: "action",
     cell: ({row}) => {
         return(
-           <EditTask />
+           <EditTask data={row.original}/>
         )
     }
   }
