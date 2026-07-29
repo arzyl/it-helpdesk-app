@@ -1,0 +1,2 @@
+ALTER TABLE "userinvTable" ADD COLUMN "user_id" integer;--> statement-breakpoint
+ALTER TABLE "userinvTable" ADD CONSTRAINT "userinvTable_user_id_inventory_inv_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."inventory"("inv_id") ON DELETE no action ON UPDATE no action;

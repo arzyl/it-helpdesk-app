@@ -1,13 +1,11 @@
 import { columns } from "./columns"
+import { getHistory } from "@/app/services/history"
 import { DataTable } from "../../../components/ui/data-table"
-import { getJob } from "@/app/services/jobqueue"
-import AddTask from "./addtask"
 
-export default async function JobQueuePage() {
-    const data = await getJob()
+export default async function HistoryPage() {
+    const data = await getHistory()
     return (
         <div className="mx-auto py-10 ml-2 w-full">
-            <AddTask />
             <DataTable columns={columns} data={data} filterColumn="activity" />
         </div>
     )

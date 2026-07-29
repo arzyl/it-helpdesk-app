@@ -1,7 +1,8 @@
 export interface JobQueue {
-    id: number;
+    jobs_id: number;
     activity: string;
     assignee: string;
     status: string;
-    dateCreated: string;
+    dateCreated: Date;
+    mjo: string,
 }

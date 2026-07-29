@@ -1,21 +1,31 @@
-"use client"
+import {
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogTrigger,
+} from "@/components/ui/dialog"
 
-import { Dialog, DialogHeader, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Field } from "@/components/ui/field"
-import { SquarePen } from "lucide-react"
+import { Field } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button";
-import { JobQueue } from "@/app/types/jobqueue";
+import { EyeIcon } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { jobTable } from "@/db/schema";
+import { Input } from "@/components/ui/input";
 
-type EditProps = {
-    data: JobQueue
+import { JobQueue } from "@/app/types/jobqueue";
+
+interface ViewProps {
+   data: JobQueue
 }
+export default function View({ data }: ViewProps) {
 
-export default function EditTask({ data }: EditProps) {
+    const [selectedRow, setSelectedRow] = useState<any>(null);
+    const [open, setOpen] = useState(false);
+
+    const handleView = (row: any) => {
+        setSelectedRow(row.original);
+        setOpen(true);
+    };
+
     const fields = [
         { fId: "activity", fLabel: "Task", fPlaceholders: "Enter activity", fType: "input" },
         { fId: "assignee", fLabel: "Assignee", fPlaceholders: "(e.g Luke)", fType: "input" },
@@ -28,44 +38,13 @@ export default function EditTask({ data }: EditProps) {
             ], fType: "select"
         },
     ];
-    // Create handleEdit -------------**
-    const [open,setOpen] = useState(false)
-    const router = useRouter()
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-
-        const formData = new FormData(e.currentTarget)
-
-        const payload = {
-            id: data.jobs_id,
-            activity: formData.get("activity"),
-            assignee: formData.get("assignee"),
-            status: formData.get("status"),
-            mjo: formData.get("mjo"),
-        }
-
-        const response = await fetch(`/api/jobqueue/`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-  
-        })
-        console.log("Updated successfully")
-        setOpen(false)
-        router.refresh()
-    }
-
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger className={"hover:scale-110"}>
-                <SquarePen />
+                <EyeIcon />
             </DialogTrigger>
 
             <DialogContent>
-                <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {fields.map((item) => (
                             <Field key={item.fId}>
@@ -89,17 +68,16 @@ export default function EditTask({ data }: EditProps) {
                                         placeholder={item.fPlaceholders}
                                         name={item.fId}
                                         defaultValue={data[item.fId as keyof JobQueue] as string}
-                                        
+
                                     />
                                 )}
                             </Field>
                         ))}
                     </div>
-                    <div className="mt-5">
+                    {/* <div className="mt-5">
                         <Button className={"w-full"} type="submit">Save</Button>
-                    </div>
-                </form>
+                    </div> */}
             </DialogContent>
-        </Dialog>
+        </Dialog> 
     )
 }

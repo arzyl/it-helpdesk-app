@@ -27,11 +27,13 @@ import { useState } from "react"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    filterColumn: string;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    filterColumn,
 }: DataTableProps<TData, TValue>) {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const table = useReactTable({
@@ -53,23 +55,23 @@ export function DataTable<TData, TValue>({
 
     return (
         // <div className="overflow-hidden rounded-md border w-[800px]">
-        <div className="table-auto w-full overflow-x-auto">
+        <div className="overflow-x-auto">
             <Input
                 placeholder="Filter jobs..."
-                value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
+                value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ""}
                 onChange={(e) =>
-                    table.getColumn("status")?.setFilterValue(e.target.value)
+                    table.getColumn(filterColumn)?.setFilterValue(e.target.value)
                 }
                 
                 //className="max-w-sm"
             />
-            <Table className="w-full">
+            <Table className="table-fixed ">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 return (
-                                    <TableHead key={header.id}>
+                                    <TableHead key={header.id} style={{ width: header.getSize() }}>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
