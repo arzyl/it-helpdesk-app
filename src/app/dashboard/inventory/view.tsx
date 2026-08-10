@@ -2,12 +2,14 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
-import { EyeIcon } from "lucide-react";
+import { CheckIcon, EyeIcon, SquarePen } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 
 import { Inventory } from "@/app/types/inventory";
 import { inventoryTable } from "@/db/schema";
+import EditTask from "./edittask";
+import { Button } from "@/components/ui/button";
 
 interface ViewProps {
     data: Inventory
@@ -39,6 +41,7 @@ export default function View({ data }: ViewProps) {
         //     ], fType: "select"
         // },
     ];
+    const [disable, setDisable] = useState(true);
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger className={"hover:scale-110"}>
@@ -49,19 +52,33 @@ export default function View({ data }: ViewProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                     {fields.map((test) => (
-                        <div key={test.fId}> 
+                        <div key={test.fId}>
                             <FieldLabel>
                                 {test.fLabel}
                             </FieldLabel>
                             <Input
+                                disabled={disable}
                                 defaultValue={test.fval}
                             />
                         </ div>
                     ))}
-                        </div>
+                    <div>
+                        {disable ? (
+                            <SquarePen
+                                className="cursor-pointer hover:scale-110"
+                                onClick={() => setDisable(false)}
+                            />
+                        ) : (
+                            <Button onClick={() => setDisable(true)} className="w-full">
+                                Save
+                            </Button>
+                        )}
+                    </div>
+                </div>
                 {/* <div className="mt-5">
                         <Button className={"w-full"} type="submit">Save</Button>
                     </div> */}
+
             </DialogContent>
         </Dialog>
     )

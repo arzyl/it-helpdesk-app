@@ -39,5 +39,9 @@ export const columns: ColumnDef<History>[] = [
     }
     
   },
+  {
+    accessorKey: "jobs.remarks",
+    header: "Remarks"
+  },
   
 ]

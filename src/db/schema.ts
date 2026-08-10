@@ -7,6 +7,7 @@ export const jobTable = pgTable("jobs", {
   status: varchar({length: 255}).notNull(),
   dateCreated: timestamp().notNull().defaultNow(),
   mjo: varchar({length: 255}),
+  remarks: varchar({length: 255}),
 });
 
 export const historyTable = pgTable ("history",{

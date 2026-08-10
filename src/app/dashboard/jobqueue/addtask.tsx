@@ -26,6 +26,7 @@ export default function AddTask() {
                 { label: "Completed", value: "Completed" },
             ], fType: "select"
         },
+        { fId: "remarks", fLabel: "Remarks", fPlaceholders: "Enter remarks", fType: "input" },
     ];
     const router = useRouter();
     const [open, setOpen] = useState(false);
@@ -59,7 +60,9 @@ export default function AddTask() {
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {fields.map((item) => (
-                            <Field key={item.fId}>
+                            <Field key={item.fId}
+                                className={item.fId === "remarks" ? "sm:col-span-2" : ""}
+                            >
                                 <Label>{item.fLabel}</Label>
 
                                 {item.fType === "select" ? (
@@ -78,6 +81,7 @@ export default function AddTask() {
                                     <Input
                                         placeholder={item.fPlaceholders}
                                         name={item.fId}
+                                        className={item.fId === "remarks" ? "h-20" : "w-"}
                                     />
                                 )}
                             </Field>

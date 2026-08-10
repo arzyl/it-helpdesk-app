@@ -90,3 +90,14 @@ export async function POST(request: Request) {
         )
     }
 }
+
+export async function PATCH(request:Request) {
+
+    const {inv_id, ...AllFields} = await request.json();
+
+    await db.update(inventoryTable).set(AllFields).where(eq(inventoryTable.inv_id, inv_id));
+
+    return Response.json({
+        message:"Updated!",
+    });
+}

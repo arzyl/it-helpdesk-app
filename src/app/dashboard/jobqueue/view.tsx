@@ -37,6 +37,7 @@ export default function View({ data }: ViewProps) {
                 { label: "Completed", value: "Completed" },
             ], fType: "select"
         },
+        { fId: "remarks", fLabel: "Remarks", fPlaceholders: "Enter remarks", fType: "input" },
     ];
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -47,7 +48,8 @@ export default function View({ data }: ViewProps) {
             <DialogContent>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {fields.map((item) => (
-                            <Field key={item.fId}>
+                            <Field key={item.fId}
+                                className={item.fId === "remarks" ? "sm:col-span-2" : ""}>
                                 <Label>{item.fLabel}</Label>
 
                                 {item.fType === "select" ? (
@@ -65,10 +67,11 @@ export default function View({ data }: ViewProps) {
                                     </select>
                                 ) : (
                                     <Input
+                                        
                                         placeholder={item.fPlaceholders}
                                         name={item.fId}
                                         defaultValue={data[item.fId as keyof JobQueue] as string}
-
+                                        className={item.fId === "remarks" ? "w-full h-20 sm:col-span-2" : "w-full"}
                                     />
                                 )}
                             </Field>
