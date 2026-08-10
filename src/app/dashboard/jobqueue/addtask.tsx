@@ -36,7 +36,7 @@ export default function AddTask() {
         const body = {
             ...Object.fromEntries(new FormData(e.currentTarget))
         }
-        const response = await fetch("http://localhost:3000/api/jobqueue", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/jobqueue`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body),
