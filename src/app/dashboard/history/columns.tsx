@@ -21,19 +21,7 @@ export const columns: ColumnDef<History>[] = [
   },
   {
     accessorKey: "history.dateFinished",
-    header: "Finished Date",
-    cell: ({ row }) => {
-      const date = row.getValue("history.dateFinished") as string;
-
-      return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      }).format(new Date(date));
-    },
-    
+    header: "Finished Date",    
   },
   {
     accessorKey: "jobs.mjo",
