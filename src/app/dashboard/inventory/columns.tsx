@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import View from "./view";
 import { Inventory } from "@/app/types/inventory";
+import EditTask from "./edittask";
 
 export const columns: ColumnDef<Inventory>[] = [
     {
@@ -19,11 +20,12 @@ export const columns: ColumnDef<Inventory>[] = [
         header: "Position"
     },
     {
-        id: "action",
-        cell: ({row}) => {
-            return (
-                <div><View data={row.original} /></div>
-            )
-        }
+        id: "viewedit",
+            size: 40,
+            cell: ({ row }) => {
+              return (
+                  <EditTask data={row.original} />
+              )
+            }
     },
 ];

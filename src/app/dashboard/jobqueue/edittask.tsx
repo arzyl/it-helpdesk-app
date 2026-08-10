@@ -24,9 +24,9 @@ export default function EditTask({ data }: EditProps) {
             fId: "status", fLabel: "Status", fPlaceholders: "Enter activity", fOptions: [
                 { label: "Pending", value: "Pending" },
                 { label: "In Progress", value: "In Progress" },
-                { label: "Completed", value: "Completed" },
             ], fType: "select"
         },
+        { fId: "remarks", fLabel: "Remarks", fPlaceholders: "Enter remarks", fType: "input" }
     ];
     // Create handleEdit -------------**
     const [open,setOpen] = useState(false)
@@ -43,6 +43,7 @@ export default function EditTask({ data }: EditProps) {
             assignee: formData.get("assignee"),
             status: formData.get("status"),
             mjo: formData.get("mjo"),
+            remarks: formData.get("remarks"),
         }
 
         const response = await fetch(`/api/jobqueue/`, {
@@ -68,7 +69,8 @@ export default function EditTask({ data }: EditProps) {
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {fields.map((item) => (
-                            <Field key={item.fId}>
+                            <Field key={item.fId}
+                            className={item.fId === "remarks" ? "sm:col-span-2" : ""}>
                                 <Label>{item.fLabel}</Label>
 
                                 {item.fType === "select" ? (
@@ -89,7 +91,7 @@ export default function EditTask({ data }: EditProps) {
                                         placeholder={item.fPlaceholders}
                                         name={item.fId}
                                         defaultValue={data[item.fId as keyof JobQueue] as string}
-                                        
+                                        className={item.fId === "remarks" ? "h-20" : "w-full"}
                                     />
                                 )}
                             </Field>
