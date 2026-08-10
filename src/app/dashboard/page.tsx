@@ -1,7 +1,6 @@
 import { AppSidebar } from "@/components/ui/app-sidebar"
+import { redirect } from "next/navigation"
 
 export default function DashBoard() {
-    return (
-        <div>Where is this?</div>
-    )
+    redirect("/dashboard/jobqueue")
 }
