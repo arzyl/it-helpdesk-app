@@ -4,6 +4,8 @@ import { columns } from "./columns"
 import { getInventory } from "@/app/services/inventory"
 import AddInventory from "./addinv"
 
+export const dynamic = "force-dynamic";
+
 export default async function InventoryPage() {
     const data = await getInventory()
     return (

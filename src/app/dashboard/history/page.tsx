@@ -2,6 +2,8 @@ import { columns } from "./columns"
 import { getHistory } from "@/app/services/history"
 import { DataTable } from "../../../components/ui/data-table"
 
+export const dynamic = "force-dynamic";
+
 export default async function HistoryPage() {
     const data = await getHistory()
     return (
