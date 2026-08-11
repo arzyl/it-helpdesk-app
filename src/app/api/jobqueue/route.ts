@@ -19,8 +19,8 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     try{
-    const { assignee = '', activity = '', status = '', mjo = ''} = await request.json();
-    const newData: typeof jobTable.$inferInsert = {assignee,activity,status,mjo};
+    const { assignee = '', activity = '', status = '', mjo = '', remarks = '' } = await request.json();
+    const newData: typeof jobTable.$inferInsert = {assignee,activity,status,mjo,remarks};
     await db.insert(jobTable).values(newData);
 
     return Response.json({
