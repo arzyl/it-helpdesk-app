@@ -1,7 +1,7 @@
 import { jobTable } from '@/db/schema';
 import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/neon-http';
-import { asc, desc, eq, notEq } from 'drizzle-orm';
+import { asc, desc, eq } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 import { NextResponse } from 'next/server';
 
