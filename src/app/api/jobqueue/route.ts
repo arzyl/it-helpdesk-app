@@ -9,7 +9,7 @@ const db = drizzle(process.env.DATABASE_URL!);
 
 export async function GET(request: Request) {
     
-    const job = (await db.select().from(jobTable).where(or(eq(jobTable.status, 'Pending'),eq(jobTable.status, 'On-going')).orderBy(desc(jobTable.dateCreated)));
+    const job = (await db.select().from(jobTable).where(or(eq(jobTable.status, 'Pending'),eq(jobTable.status, 'In Progress')).orderBy(desc(jobTable.dateCreated)));
 
     return new Response(JSON.stringify(job),{
         status: 200,
