@@ -57,7 +57,7 @@ export default function AddInventory() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger render={<Button className={"mb-1 w-full"} />}>
-                Add Task
+                Add New Record
             </DialogTrigger>
 
             <DialogContent>
