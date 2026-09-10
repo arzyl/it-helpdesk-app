@@ -1,7 +1,7 @@
 import { jobTable } from '@/db/schema';
 import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/neon-http';
-import { asc, desc, eq } from 'drizzle-orm';
+import { asc, desc, eq, notEq } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 import { NextResponse } from 'next/server';
 
@@ -9,7 +9,7 @@ const db = drizzle(process.env.DATABASE_URL!);
 
 export async function GET(request: Request) {
     
-    const job = (await db.select().from(jobTable).orderBy(desc(jobTable.dateCreated)));
+    const job = (await db.select().from(jobTable).where(notEq(jobTable.status, 'Completed')).orderBy(desc(jobTable.dateCreated)));
 
     return new Response(JSON.stringify(job),{
         status: 200,
