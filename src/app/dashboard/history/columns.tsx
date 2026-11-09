@@ -14,6 +14,18 @@ export const columns: ColumnDef<History>[] = [
     id: "activity",
     accessorKey: "jobs.activity",
     header: "Activity",
+    size: 250,
+    cell: ({ getValue }) => {
+    const value = getValue() as string;
+
+    return (
+      <div
+        className="max-w-[200px] truncate "
+        title={value}
+      >
+        {value}
+      </div>
+    );}
   },
   {
     accessorKey: "jobs.assignee",
